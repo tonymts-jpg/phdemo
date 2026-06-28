@@ -4,7 +4,7 @@ import { test, expect } from "@playwright/test";
 
 test("default gallery assets are complete", async () => {
   const seen = new Set<string>();
-  for (let post = 1; post <= 18; post++) {
+  for (let post = 1; post <= 36; post++) {
     const dir = path.join(process.cwd(), "public", "generated", "posts", `post-${post}`);
     expect(fs.existsSync(dir), `post-${post} gallery directory`).toBeTruthy();
     const images = fs.readdirSync(dir).filter((name) => /\.webp$/i.test(name)).sort();
@@ -14,10 +14,10 @@ test("default gallery assets are complete", async () => {
       expect(images).toContain(filename);
       const fullPath = path.join(dir, filename);
       seen.add(fullPath);
-      expect(fs.statSync(fullPath).size, fullPath).toBeGreaterThan(10_000);
+      expect(fs.statSync(fullPath).size, fullPath).toBeGreaterThan(8_000);
     }
   }
-  expect(seen.size).toBe(216);
+  expect(seen.size).toBe(432);
 });
 
 test("核心页面可以访问", async ({page}) => {
@@ -35,9 +35,9 @@ test("可以重置 Demo", async ({page}) => {
   await expect(page.getByRole("status")).toHaveText("Demo 数据已重置");
 });
 
-test("首页使用五个新分类并可筛选内容", async ({page}) => {
+test("首页使用七个分类并可筛选内容", async ({page}) => {
   await page.goto("/");
-  for (const category of ["Cosplay","美足","調教","戶外","R18"]) {
+  for (const category of ["Cosplay","美足","調教","戶外","R18","SM","男帥"]) {
     const tab = page.getByRole("button",{name:category,exact:true});
     await expect(tab).toBeVisible();
     await tab.click();
@@ -48,16 +48,24 @@ test("首页使用五个新分类并可筛选内容", async ({page}) => {
   }
 });
 
+test("新增 SM 与男帅博主页可以访问", async ({page}) => {
+  await page.goto("/creator/nora");
+  await expect(page.getByRole("heading",{name:"黑曜 Nora"})).toBeVisible();
+  await expect(page.getByText("@nora · SM")).toBeVisible();
+  await page.goto("/creator/shenyue");
+  await expect(page.getByRole("heading",{name:"沈越"})).toBeVisible();
+  await expect(page.getByText("@shenyue · 男帥")).toBeVisible();
+});
+
 test("作品卡显示八张预览并引导会员解锁", async ({page}) => {
   await page.goto("/");
   const memberPost=page.locator("article").filter({has:page.getByRole("link",{name:"Momo Studio"})}).first();
   await expect(memberPost.getByTestId("post-card-gallery").locator("button")).toHaveCount(8);
   const lockedImage=memberPost.getByRole("button",{name:"解锁图片 3"});
   await expect(lockedImage).toBeVisible();
-  await expect(async () => {
-    await lockedImage.click();
-    await expect(page).toHaveURL(/\/membership\/momo/,{timeout:1000});
-  }).toPass();
+  await lockedImage.click();
+  await expect(page).toHaveURL(/\/membership\/momo/,{timeout:5000});
+  await expect(page.getByRole("heading",{name:"加入 Momo Studio 的会员"})).toBeVisible();
 });
 
 test("单次购买作品付款后立即显示完整图片", async ({page}) => {

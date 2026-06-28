@@ -38,7 +38,37 @@ export const creators: CreatorProfile[] = [
     {id:"p52",name:"私语会员",price:56,color:"#a865d7",benefits:["完整高清图集","幕后手记","主题投票"]},
     {id:"p53",name:"深夜收藏家",price:118,color:"#6559df",benefits:["全部权益","限定企划","作品署名鸣谢"]}
   ] },
-  { id:"c6", name:"角色造梦局", handle:"gameclub", avatar:"梦", role:"creator", bio:"从游戏、电影与原创设定中还原角色，记录每次变身的完整过程。", category:"Cosplay", followers:92100, members:1560, cover:"cover-6", verified:true, plans:[] }
+  { id:"c6", name:"角色造梦局", handle:"gameclub", avatar:"梦", role:"creator", bio:"从游戏、电影与原创设定中还原角色，记录每次变身的完整过程。", category:"Cosplay", followers:92100, members:1560, cover:"cover-6", verified:true, plans:[] },
+  { id:"c7", name:"黑曜 Nora", handle:"nora", avatar:"曜", role:"creator", bio:"成熟暗黑时尚与安全边界主题博主，擅长皮革、绳结与高反差棚拍叙事。", category:"SM", followers:68800, members:1120, cover:"cover-3", verified:true, plans:[
+    {id:"p71",name:"观察席",price:22,color:"#ff7b75",benefits:["主题预览","安全边界手记","会员徽章"]},
+    {id:"p72",name:"暗场会员",price:58,color:"#a865d7",benefits:["完整高清图集","布光与造型拆解","主题投票"]},
+    {id:"p73",name:"黑曜收藏家",price:128,color:"#6559df",benefits:["全部权益","限定棚拍企划","作品署名鸣谢"]}
+  ]},
+  { id:"c8", name:"缎面 Ivy", handle:"ivy", avatar:"缎", role:"creator", bio:"以成熟女性力量、缎面服装与戏剧化情绪为核心的非露骨 SM 美学博主。", category:"SM", followers:53600, members:860, cover:"cover-5", verified:true, plans:[
+    {id:"p81",name:"缎面读者",price:19,color:"#ff7b75",benefits:["每周精选预览","造型清单","会员徽章"]},
+    {id:"p82",name:"私享会员",price:52,color:"#a865d7",benefits:["完整图集","幕后手记","月度主题投票"]},
+    {id:"p83",name:"舞台合伙人",price:116,color:"#6559df",benefits:["全部权益","限定企划","作品署名"]}
+  ]},
+  { id:"c9", name:"陆沉 Kai", handle:"kai", avatar:"K", role:"creator", bio:"男性暗黑绅士风与张力人像博主，关注安全、礼仪、服装和摄影现场控制。", category:"SM", followers:49700, members:740, cover:"cover-6", verified:false, plans:[
+    {id:"p91",name:"旁听席",price:16,color:"#ff7b75",benefits:["主题预告","穿搭笔记"]},
+    {id:"p92",name:"黑领会员",price:46,color:"#a865d7",benefits:["完整图集","现场流程","幕后花絮"]},
+    {id:"p93",name:"绅士档案",price:98,color:"#6559df",benefits:["全部权益","限定外拍","企划署名"]}
+  ]},
+  { id:"c10", name:"沈越", handle:"shenyue", avatar:"越", role:"creator", bio:"男帅时尚人像博主，擅长城市夜景、西装造型与干净利落的镜头语言。", category:"男帥", followers:101200, members:1700, cover:"cover-2", verified:true, plans:[
+    {id:"p101",name:"街角席",price:18,color:"#ff7b75",benefits:["每周精选","穿搭清单","会员徽章"]},
+    {id:"p102",name:"城市会员",price:49,color:"#a865d7",benefits:["完整高清图集","调色预设","幕后花絮"]},
+    {id:"p103",name:"黑卡收藏",price:108,color:"#6559df",benefits:["全部权益","限定外拍","作品署名鸣谢"]}
+  ]},
+  { id:"c11", name:"顾野", handle:"guye", avatar:"野", role:"creator", bio:"运动型男与户外男性写真博主，记录力量训练、山野外拍与自然光肖像。", category:"男帥", followers:83400, members:1320, cover:"cover-4", verified:true, plans:[
+    {id:"p111",name:"训练席",price:20,color:"#ff7b75",benefits:["训练主题预览","器材清单"]},
+    {id:"p112",name:"山野会员",price:54,color:"#a865d7",benefits:["完整图集","外拍路线","幕后记录"]},
+    {id:"p113",name:"峰顶收藏",price:118,color:"#6559df",benefits:["全部权益","限定日出企划","作品署名"]}
+  ]},
+  { id:"c12", name:"韩序", handle:"hanxu", avatar:"序", role:"creator", bio:"清冷电影感男性肖像博主，偏爱简约空间、白衬衫、低饱和色调与叙事光影。", category:"男帥", followers:76800, members:1190, cover:"cover-1", verified:true, plans:[
+    {id:"p121",name:"观影席",price:17,color:"#ff7b75",benefits:["每周预览","镜头笔记"]},
+    {id:"p122",name:"叙事会员",price:45,color:"#a865d7",benefits:["完整图集","布光拆解","主题投票"]},
+    {id:"p123",name:"片场收藏",price:96,color:"#6559df",benefits:["全部权益","限定短片企划","作品署名"]}
+  ]}
 ];
 
 const titles = [
@@ -62,7 +92,7 @@ const titles = [
   ["山顶日出拍摄清单","器材、路线、天气判断与完整户外拍摄复盘。","戶外"]
 ] as const;
 
-export const posts: Post[] = titles.map((item, i) => ({
+const basePosts: Post[] = titles.map((item, i) => ({
   id:`post-${i+1}`, creatorId:`c${i%6+1}`, title:item[0], excerpt:item[1],
   content:"这是完整作品内容的 Demo 展示。博主可以在这里分享高清图集、创作过程、源文件说明与会员专属幕后故事。PureHub 将内容、社群与可持续收入放在同一个体验里。",
   cover:`cover-${i%6+1}`, category:item[2], tags:[item[2],"精选",i%2?"幕后":"灵感"],
@@ -71,6 +101,39 @@ export const posts: Post[] = titles.map((item, i) => ({
   createdAt:i<2?"今天":i<7?"本周":"6月",
   media:createPostMedia(`post-${i+1}`,item[0])
 }));
+
+const extraPosts = [
+  ["post-19","c7","黑曜棚拍：皮革边界","以成熟暗黑时尚语言记录皮革造型、手势张力与安全边界。","SM","free",undefined,3360,"今天"],
+  ["post-20","c7","绳结光影练习","用低调棚灯呈现绳结纹理、服装层次与人物的冷静神态。","SM","members",undefined,3497,"今天"],
+  ["post-21","c7","暗红幕布企划","黑曜 Nora 的暗红舞台主题，从布景到姿态引导完整记录。","SM","purchase",38,3634,"本周"],
+  ["post-22","c8","缎面手套与高背椅","缎面服装、复古高背椅与成熟女性力量的情绪写真。","SM","free",undefined,3771,"今天"],
+  ["post-23","c8","银灰束腰造型册","围绕束腰、手套与冷调空间完成的非露骨时尚主题。","SM","members",undefined,3908,"本周"],
+  ["post-24","c8","午夜舞台排练","记录灯位、服装、肢体语言和安全沟通的幕后排练。","SM","purchase",32,4045,"本周"],
+  ["post-25","c9","黑领绅士肖像","男性暗黑绅士风棚拍，强调礼仪、服装质感与克制张力。","SM","free",undefined,4182,"今天"],
+  ["post-26","c9","金属手杖与影子","以手杖、风衣和硬光影子构成的成熟男性主题图集。","SM","members",undefined,4319,"本周"],
+  ["post-27","c9","夜色指令板","用安全词卡、拍摄流程板和片场记录构建非露骨叙事。","SM","purchase",36,4456,"6月"],
+  ["post-28","c10","雨夜西装街拍","城市霓虹、黑色西装与雨夜街角的男帅时尚外拍。","男帥","free",undefined,4593,"今天"],
+  ["post-29","c10","天台风衣计划","高楼天台、长风衣与低角度镜头的冷峻男性肖像。","男帥","members",undefined,4730,"本周"],
+  ["post-30","c10","黑白电梯间","极简黑白空间里完成的西装、腕表与眼神特写。","男帥","purchase",28,4867,"本周"],
+  ["post-31","c11","山野训练日记","晨雾山路、运动外套与力量训练后的自然光肖像。","男帥","free",undefined,5004,"今天"],
+  ["post-32","c11","岩壁与背包清单","户外男性写真与装备细节，从背包到登山鞋完整记录。","男帥","members",undefined,5141,"本周"],
+  ["post-33","c11","日出冲刺复盘","山顶日出、汗水和风声中的运动型男拍摄复盘。","男帥","purchase",30,5278,"6月"],
+  ["post-34","c12","白衬衫窗边光","低饱和室内光影、白衬衫与清冷男性肖像。","男帥","free",undefined,5415,"今天"],
+  ["post-35","c12","旧影院座椅","复古影院、暗红座椅与电影感侧脸构图。","男帥","members",undefined,5552,"本周"],
+  ["post-36","c12","蓝灰房间独白","蓝灰色房间、台灯与克制表情组成的叙事写真。","男帥","purchase",34,5689,"6月"]
+] as const;
+
+const extraPostRecords: Post[] = extraPosts.map((item,index)=>({
+  id:item[0], creatorId:item[1], title:item[2], excerpt:item[3],
+  content:"这是完整作品内容的 Demo 展示。博主可以在这里分享高清图集、创作过程、源文件说明与会员专属幕后故事。PureHub 将内容、社群与可持续收入放在同一个体验里。",
+  cover:`cover-${index%6+1}`, category:item[4], tags:[item[4],"精选",index%2?"幕后":"灵感"],
+  visibility:item[5], price:item[6],
+  likes:item[7], comments:[{id:`cm-${item[0]}`,user:"阿澈",text:"质感和镜头节奏都很完整，收藏了。",time:"1小时前"}],
+  createdAt:item[8],
+  media:createPostMedia(item[0],item[2])
+}));
+
+export const posts: Post[] = [...basePosts, ...extraPostRecords];
 
 export const products: Product[] = [
   {id:"pr1",creatorId:"c1",title:"《雾港巡游》4K 套图",price:36,cover:"cover-1"},

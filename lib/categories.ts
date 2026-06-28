@@ -1,4 +1,4 @@
-export const CONTENT_CATEGORIES = ["Cosplay", "美足", "調教", "戶外", "R18"] as const;
+export const CONTENT_CATEGORIES = ["Cosplay", "美足", "調教", "戶外", "R18", "SM", "男帥"] as const;
 
 export type ContentCategory = (typeof CONTENT_CATEGORIES)[number];
 
